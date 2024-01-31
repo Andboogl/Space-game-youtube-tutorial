@@ -17,6 +17,21 @@ class Gun:
         self.__size = (70, 70)
         self.__image = pygame.transform.scale(pygame.image.load('images/gun.png'), self.__size)
 
+    @property
+    def x(self) -> int:
+        """Get gun position on x"""
+        return self.__x
+
+    @property
+    def y(self) -> int:
+        """Get gun position on y"""
+        return self.__y
+
+    @property
+    def image(self):
+        """Get gun image"""
+        return self.__image
+
     def move(self, where: str) -> None:
         """Move gun"""
         if where == 'top':
