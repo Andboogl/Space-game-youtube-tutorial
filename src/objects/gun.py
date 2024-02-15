@@ -1,6 +1,7 @@
 """Gun"""
 
 
+import os
 import pygame
 import settings
 
@@ -15,7 +16,10 @@ class Gun:
 
         # Loading gun image
         self.__size = (70, 70)
-        self.__image = pygame.transform.scale(pygame.image.load('images/gun.png'), self.__size)
+        self.__image = pygame.transform.scale(
+            pygame.image.load(os.path.join('images',
+                                           'gun.png')),
+                                           self.__size)
 
     @property
     def x(self) -> int:
@@ -53,4 +57,3 @@ class Gun:
     def draw(self) -> None:
         """Draw gun on the screen"""
         self.__screen.blit(self.__image, (self.__x, self.__y))
-

@@ -17,8 +17,9 @@ class Game:
         pygame.display.set_icon(settings.window_icon)
 
         # Game objects
-        self.__gun = objects.Gun(self.__screen, 100, 100)
+        self.__gun = objects.Gun(self.__screen, 100, 700)
         self.__bullets = []
+        self.__enemies = [objects.Enemy(self.__screen, 100, 50)]
 
     def mainloop(self) -> None:
         """Game mainloop"""
@@ -41,6 +42,16 @@ class Game:
             if keys[pygame.K_d]:
                 self.__gun.move('right')
 
+            # Enemies drawing
+            for enemy in self.__enemies:
+                enemy.draw()
+                enemy.update()
+
+                if self.__gun.image.get_rect(
+                    topleft=(self.__gun.x,
+                             self.__gun.y)).colliderect(enemy.image_rect):
+                    self.__init__()
+
             # Bullets drawing
             for bullet in self.__bullets:
                 bullet.draw()
@@ -48,7 +59,11 @@ class Game:
 
                 if bullet.y <= 0:
                     self.__bullets.remove(bullet)
-                    print(self.__bullets)
+
+                for enemy in self.__enemies:
+                    if bullet.image.colliderect(enemy.image_rect):
+                        self.__bullets.remove(bullet)
+                        self.__enemies.remove(enemy)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
