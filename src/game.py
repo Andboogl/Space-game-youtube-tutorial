@@ -67,7 +67,7 @@ class Game:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                   sys.exit(0)
+                    sys.exit(0)
 
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
@@ -76,4 +76,3 @@ class Game:
 
             self.__clock.tick(settings.fps)
             pygame.display.update()
-
